@@ -1,168 +1,84 @@
-// // import React, { useState } from 'react';
-// import { Grid, Typography, TextField, Button, Card, CardContent, CardMedia } from '@mui/material';
-// import { Link } from 'react-router-dom';
-// // import { db } from '../../firebaseConfig';
-// // import { addDoc, collection } from 'firebase/firestore';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Hidden from '@mui/material/Hidden';
+import Grid from '@mui/material/Grid';
 
-// const Register = () => {
-//   // const [name, setName] = useState('');
-//   // const [email, setEmail] = useState('');
-//   // const [phone, setPhone] = useState('');
-//   // const [subject, setSubject] = useState('');
-//   // const [message, setMessage] = useState('');
+const AnimatedButton = styled(Button)({
+  padding: '10px 20px',
+  backgroundColor: '#007bff',
+  color: 'white',
+  borderRadius: '5px',
+  cursor: 'pointer',
+  transition: 'background-color 0.3s ease',
+  '&:hover': {
+    backgroundColor: '#32CD32',
+  },
+});
 
-//   // const userCollection = collection(db, "contactdata")
+const AnimatedImage = styled('img')({
+  maxWidth: '100%',
+  height: '58vh',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.8)',
+  transition: 'transform 0.3s ease',
+  '&:hover': {
+    transform: 'scale(1.1)',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.8)',
+  },
+});
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // addDoc(userCollection, {
-//     //   name: name,
-//     //   email: email,
-//     //   phone: phone,
-//     //   subject: subject,
-//     //   message: message
-//     // }).then(() => {
-//     //   if(!alert('Message sent successfully!'))document.location='./Home'
-//     //   setName('');
-//     //   setEmail('');
-//     //   setPhone('');
-//     //   setSubject('');
-//     //   setMessage('');
-//     // }).catch((error) => {
-//     //   console.error('Error sending message:', error);
-//     //   alert('Error sending message. Please try again later.');
-//     // });
-//   };
+function Register() {
+  return (
+    <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <AnimatedImage src="Asset/register.jpg" alt="Your Image" />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <div>
+            <Typography variant="h4" gutterBottom
+            sx={{
+              color: "orange",
+              fontSize: "3rem",
+              fontWeight: "bold"
+            }}
+            >
+              Registration Forms
+            </Typography>
+            <Hidden smUp>
+              <Typography variant="body1" gutterBottom>
+                Link only visible for screens larger than or equal to small breakpoint (sm).
+              </Typography>
+            </Hidden>
+            <Box mt={2}>
+              <Hidden xsDown>
+                <Link to="/homopathy">
+                  <AnimatedButton>Homopathy</AnimatedButton>
+                </Link>
+              </Hidden>
+            </Box>
+            <Box mt={2}>
+              <Hidden xsDown>
+                <Link to="/allopathic">
+                  <AnimatedButton>Allopathic</AnimatedButton>
+                </Link>
+              </Hidden>
+            </Box>
+            <Box mt={2}>
+              <Hidden xsDown>
+                <Link to="/homopathy">
+                  <AnimatedButton>Homopathy</AnimatedButton>
+                </Link>
+              </Hidden>
+            </Box>
+          </div>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
 
-//   return (
-//     <Grid container spacing={2}
-//       sx={{
-//         marginTop: '0.3rem'
-//       }}>
-//       <Grid item xs={12}>
-//         <Typography variant="h4" align="center" gutterBottom
-//           sx={{
-//             fontSize: 40,
-//             color: '#D35400',
-//             fontWeight: 'bold',
-//           }}>
-//           Registration
-//         </Typography>
-//       </Grid>
-//       <Grid item xs={12} md={4}>
-//         <Card sx={{
-//           display: 'flex',
-//           flexDirection: 'column',
-//           marginBottom: '1rem',
-//           marginLeft: '1rem',
-//           marginRight: '2rem',
-//           paddingInlineEnd: '2rem',
-//           paddingInlineStart: '2rem',
-//           paddingBlock: '1.5rem',
-//           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.8)'
-//           // bgcolor: '#E5E4E2',
-//         }}>
-//           <CardMedia
-//             component="img"
-//             height="200"
-//             image="/Asset/register.jpg"
-//             alt="Contact Image"
-//           />
-//           <CardContent>
-//             <Typography variant='body1' gutterBottom
-//               sx={{
-//                 marginBottom: '1rem'
-//               }}>
-
-//             </Typography>
-//             <Button component={Link} to="/next-grid" variant="contained" color="primary">
-//         Next Grid
-//       </Button>
-//             <Typography variant="body1" gutterBottom
-//             >
-//               Phone: 9767425393
-//             </Typography>
-//             <Typography variant="body1" gutterBottom>
-//               Email: divyananaware28@gmail.com
-//             </Typography>
-//           </CardContent>
-//         </Card>
-//       </Grid>
-
-//       {/* Right Section */}
-//       <Grid item xs={12} md={7}>
-//         <Card sx={{ padding: 2, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.8)' }}>
-//           <CardContent>
-
-//             <form onSubmit={handleSubmit}>
-//               <Grid container spacing={2}>
-//                 <Grid item xs={12}>
-//                   <TextField
-//                     label="Name"
-//                     variant="outlined"
-//                     fullWidth
-//                     required
-//                     // onChange={(e) => setName(e.target.value)}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={12}>
-//                   <TextField
-//                     label="Email"
-//                     variant="outlined"
-//                     fullWidth
-//                     required
-//                     // onChange={(e) => setEmail(e.target.value)}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={12}>
-//                   <TextField
-//                     label="Phone Number"
-//                     variant="outlined"
-//                     fullWidth
-//                     required
-//                     // onChange={(e) => setPhone(e.target.value)}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={12}>
-//                   <TextField
-//                     label="Subject"
-//                     variant="outlined"
-//                     fullWidth
-//                     required
-//                     // onChange={(e) => setSubject(e.target.value)}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={12}>
-//                   <TextField
-//                     label="Message"
-//                     multiline
-//                     rows={4}
-//                     variant="outlined"
-//                     fullWidth
-//                     required
-//                     // onChange={(e) => setMessage(e.target.value)}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={12}>
-//                   <Button type="submit" variant="contained" fullWidth
-//                     sx={{
-//                       color: 'black',
-//                       backgroundColor: '#DC7633',
-//                       '&:hover': {
-//                         backgroundColor: '#D35400 ',
-//                       },
-//                     }}
-//                     onClick={handleSubmit}>
-//                     Submit
-//                   </Button>
-//                 </Grid>
-//               </Grid>
-//             </form>
-//           </CardContent>
-//         </Card>
-//       </Grid>
-//     </Grid>
-//   );
-// };
-
-// export default Register;
+export default Register;

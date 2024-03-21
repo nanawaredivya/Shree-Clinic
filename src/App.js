@@ -7,6 +7,8 @@ import Home from './components/pages/Home';
 import Aboutus from './components/pages/AboutUs';
 import { Doctors } from './components/pages/Doctors';
 import Register from './components/pages/Register';
+import Homopathy from './components/pages/Homopathy';
+import Allopathic from './components/pages/Allopathic';
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route path='/services' element={<Services />} />
         <Route path='/aboutus' element={<Aboutus />} />
         <Route path='/doctors' element={<Doctors />} />
+        <Route path='/homopathy' element={<Homopathy />} />
+        <Route path='/allopathic' element={<Allopathic/>}/>
         {/* <Route path='*' element={<Error />}/> */}
       </Route>
     </Routes>
