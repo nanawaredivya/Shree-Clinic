@@ -13,8 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 
-const pages = ['Home', 'AboutUs', 'Services', 'Doctors', 'Login' ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Home', 'AboutUs', 'Services', 'Doctors', 'Register' ];
+const settings = ['Profile', 'Account', 'Dashboard'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -57,7 +57,7 @@ function Header() {
             SHREE CLINIC
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -141,12 +141,12 @@ function Header() {
           >
             SHREE CLINIC
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block',fontSize: '1.2rem'  }}
               >
                 <Link style={{textDecoration : 'none', color: 'white' }} to={`/${page}`}>{page}</Link>
               </Button>

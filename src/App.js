@@ -1,12 +1,12 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
-import Login from './components/pages/Login';
 import Signin from './components/pages/Signin';
 import Services from './components/pages/Services';
 import Home from './components/pages/Home';
 import Aboutus from './components/pages/AboutUs';
 import { Doctors } from './components/pages/Doctors';
+import Register from './components/pages/Register';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
        <Route path='/' element={<Layout />}  >  
        <Route index element={<Home />} />
        <Route path='/home' element={<Home />}  />
-       <Route path='/login' element={<Login />}  />
+       <Route path='/register' element={<Register />}  />
         <Route path='/signin' element={<Signin />}  />
         <Route path='/services' element={<Services />} />
         <Route path='/aboutus' element={<Aboutus />} />
