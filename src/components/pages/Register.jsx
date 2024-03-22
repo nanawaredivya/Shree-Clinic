@@ -67,13 +67,7 @@ function Register() {
                 </Link>
               </Hidden>
             </Box>
-            <Box mt={2}>
-              <Hidden xsDown>
-                <Link to="/homopathy">
-                  <AnimatedButton>Homopathy</AnimatedButton>
-                </Link>
-              </Hidden>
-            </Box>
+            
           </div>
         </Grid>
       </Grid>

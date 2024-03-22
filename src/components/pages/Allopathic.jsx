@@ -1,115 +1,173 @@
 import React, { useState } from 'react';
-import { Button, Container, Typography, TextField, Grid } from '@mui/material';
+import { Grid, Typography, TextField, Button, Card, CardContent, CardMedia } from '@mui/material';
+import { db } from '../../firebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
 
-function Allopathic() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    symptoms: '',
-    additionalInfo: '',
-  });
+const Allopathic = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
+  const [symptoms, setSymptoms] = useState('');
+  const [info, setInfo] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const userCollection = collection(db, "allopathy")
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+    addDoc(userCollection, {
+      name: name,
+      email: email,
+      phone: phone,
+      address: address,
+      symptoms: symptoms,
+      info: info,
+    }).then(() => {
+      if(!alert('Message sent successfully!'))document.location='./Register'
+      setName('');
+      setEmail('');
+      setPhone('');
+      setAddress('');
+      setSymptoms('');
+      setInfo('');
+    }).catch((error) => {
+      console.error('Error sending message:', error);
+      alert('Error sending message. Please try again later.');
+    });
   };
 
   return (
-    <Container sx={{height: "100vh", marginTop: '2rem'}}>
-      <Typography variant="h4" align="center" gutterBottom sx={{color: '#32CD32', fontSize: '2rem', fontWeight: 'bold'}}>
-      Allopathic Registration Form
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Name"
-              variant="outlined"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Email"
-              variant="outlined"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Phone"
-              variant="outlined"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Address"
-              variant="outlined"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              rows={4}
-              label="Symptoms"
-              variant="outlined"
-              name="symptoms"
-              value={formData.symptoms}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              rows={4}
-              label="Additional Information"
-              variant="outlined"
-              name="additionalInfo"
-              value={formData.additionalInfo}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary">
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-    </Container>
+    <Grid container spacing={2}
+      sx={{
+        marginTop: '0.3rem'
+      }}>
+      <Grid item xs={12}>
+        <Typography variant="h4" align="center" gutterBottom
+          sx={{
+            fontSize: 40,
+            color: '#D35400',
+            fontWeight: 'bold',
+          }}>
+          Allopathy Registration Form
+        </Typography>
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <Card sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          marginBottom: '1rem',
+          marginLeft: '1rem',
+          marginRight: '2rem',
+          paddingInlineEnd: '2rem',
+          paddingInlineStart: '2rem',
+          paddingBlock: '1.5rem',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.8)'
+          // bgcolor: '#E5E4E2',
+        }}>
+          <CardMedia
+            component="img"
+            height="200"
+            image="/Asset/Allopathy.jpg"
+            alt="Contact Image"
+          />
+          <CardContent>
+            <Typography variant="body1" gutterBottom
+              sx={{
+                marginBottom: '1rem',
+                color: "#962ac9",
+              }}>
+              Allopathy Registration
+            </Typography>
+            
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/* Right Section */}
+      <Grid item xs={12} md={7}>
+        <Card sx={{ padding: 2, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.8)' }}>
+          <CardContent>
+
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Name"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Email"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Phone Number"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Address"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Symptoms"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    fullWidth
+                    required
+                    onChange={(e) => setSymptoms(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Additional Information"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    fullWidth
+                    required
+                    onChange={(e) => setInfo(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button type="submit" variant="contained" fullWidth
+                    sx={{
+                      color: 'black',
+                      backgroundColor: '#DC7633',
+                      '&:hover': {
+                        backgroundColor: '#D35400 ',
+                      },
+                    }}
+                    onClick={handleSubmit}>
+                    Submit
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
-}
+};
 
 export default Allopathic;
